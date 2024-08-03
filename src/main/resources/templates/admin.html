@@ -1,10 +1,103 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Admin Dashboard</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
+        .sidebar {
+            height: 100vh;
+            background-color: #343a40;
+            color: white;
+            padding: 20px;
+        }
+        .sidebar a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            padding: 10px;
+        }
+        .sidebar a:hover {
+            background-color: #495057;
+        }
+        .content {
+            margin-left: 220px;
+            padding: 20px;
+        }
+        .card {
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 <body>
-  <h1>This is Admin Page</h1>
+<div class="d-flex">
+    <div class="sidebar">
+        <h2>Admin Dashboard</h2>
+        <a href="#" th:href="@{/admin/dashboard}"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+        <a href="#" th:href="@{/admin/products}"><i class="fas fa-box"></i> Products</a>
+        <a href="#" th:href="@{/admin/orders}"><i class="fas fa-shopping-cart"></i> Orders</a>
+        <a href="#" th:href="@{/admin/users}"><i class="fas fa-users"></i> Users</a>
+        <a href="#" th:href="@{/admin/settings}"><i class="fas fa-cogs"></i> Settings</a>
+        <a href="#" th:href="@{/logout}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </div>
+    <div class="content">
+        <div class="container-fluid">
+            <h1 class="my-4">Dashboard</h1>
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="card text-white bg-primary">
+                        <div class="card-body">
+                            <div class="card-title">Products</div>
+                            <div class="card-text">
+                                <h2>150</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="card text-white bg-success">
+                        <div class="card-body">
+                            <div class="card-title">Orders</div>
+                            <div class="card-text">
+                                <h2>120</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="card text-white bg-warning">
+                        <div class="card-body">
+                            <div class="card-title">Users</div>
+                            <div class="card-text">
+                                <h2>75</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="card text-white bg-danger">
+                        <div class="card-body">
+                            <div class="card-title">Revenue</div>
+                            <div class="card-text">
+                                <h2>$5,000</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Add more dashboard content here -->
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
