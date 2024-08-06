@@ -18,38 +18,43 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     @Autowired
-    private  UserService userService;
+    private UserService userService;
 
     @Bean
-    public UserDetailsService userDetailsService(){
+    public UserDetailsService userDetailsService() {
         return userService;
     }
 
     @Bean
-    public AuthenticationProvider authenticationProvider(){
-        DaoAuthenticationProvider provider= new DaoAuthenticationProvider();
+    public AuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setUserDetailsService(userService);
         provider.setPasswordEncoder(passwordEncoder());
         return provider;
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
-                .csrf(csrf->csrf.disable())
-                .formLogin(login->{
+                .csrf(csrf -> csrf.disable())
+                .formLogin(login -> {
                     login.loginPage("/login").permitAll();
-                    login.defaultSuccessUrl("/index");
+                    login.defaultSuccessUrl("/home");
                 })
-                .authorizeHttpRequests(
-                        auth-> {
-                            auth.requestMatchers("/signup" ,"/css/**","/fonts/**","/img/**","/js/**","/sass/**","/Sources/**").permitAll();
-                            auth.anyRequest().authenticated();
-                        })
+                .logout(logout -> {
+                    logout.logoutUrl("/logout")
+                            .logoutSuccessUrl("/login?logout")
+                            .permitAll();
+                })
+                .authorizeHttpRequests(auth -> {
+                    auth.requestMatchers("/signup", "/css/**", "/fonts/**", "/img/**", "/js/**", "/sass/**", "/Sources/**").permitAll();
+                    auth.anyRequest().authenticated();
+                })
                 .build();
     }
 }
